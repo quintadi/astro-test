@@ -6,30 +6,31 @@ interface Props {
 }
 
 const { playlist } = Astro.props;
-const {id, title, cover, artists, color} = playlist;
+const { id, title, cover, artists, color } = playlist;
 
 const artistsString = artists.join(", ");
 ---
 
 <a
-href={`/playlist/${id}`}
-class="playlist-item transition-all duration-300 flex relative p-2 overflow-hidden items-center gap-4 rounded-md hover:bg-zinc-800 shadow-lg hover:shadow-xl bg-zinc-500/30"
+  href={`/playlist/${id}`}
+  class="playlist-item transition-all duration-300 flex relative p-2 overflow-hidden gap-4 rounded-md hover:bg-zinc-800 shadow-lg hover:shadow-xl bg-zinc-500/30 w-44 flex-col"
+  transition:name=`playlist ${id} box`
 >
-<picture class="w-12 h-12 flex-none">
+  <picture class="aspect-square w-full h-auto flex-none">
     <img
-    src={cover}
-    alt={`Cover of ${title} by ${artistsString}`}
-    class="object-cover w-full h-full rounded-md"
+      src={cover}
+      alt={`Cover of ${title} by ${artistsString}`}
+      class="object-cover w-full h-full rounded-md"
+      transition:name=`playlist ${id} cover`
     />
-</picture>
-<div class="flex flex-auto flex-col truncate">
+  </picture>
+  <div class="flex flex-auto flex-col truncate px-2">
     <h4 class="font-semibold text-sm">
-        {title}
+      {title}
     </h4>
 
     <span class="text-xs text-gray-500">
-        {artistsString}
+      {artistsString}
     </span>
-</div>
-
+  </div>
 </a>
